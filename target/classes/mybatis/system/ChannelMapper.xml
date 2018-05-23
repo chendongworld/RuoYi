@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.channel.dao.SysChannelDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.ruoyi.project.system.channel.domain.SysChannel">
+		<id column="channel_id"              property="channelId" />
+		<result column="channel_name"       property="channelName" />
+		<result column="channel_sort"       property="channelSort" />
+		<result column="channel_attribute" property="channelAttribute" />
+		<result column="create_time"        property="createTime" />
+		<result column="update_time"        property="updateTime" />
+		<result column="create_by"          property="createBy" />
+		<result column="update_by"          property="updateBy" />
+		<result column="remark"              property="remark" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        channel_id , channel_name, channel_sort , channel_attribute , create_time , update_time , create_by , update_by, remark
+		</sql>
+		<select id="selectSysChannelAll" resultMap="BaseResultMap">
+			SELECT * from sys_channel ORDER BY channel_sort ,  create_time
+		</select>
+		<select id="selectSysChannelById" parameterType="Long" resultMap="BaseResultMap">
+			select channel_id , channel_name, channel_sort , channel_attribute , create_time , update_time , create_by , update_by, remark
+			from sys_channel u
+			where u.channel_id = #{channelId}
+		</select>
+	<select id="selectSysChannelByName" parameterType="String" resultMap="BaseResultMap">
+		select channel_id , channel_name, channel_sort , channel_attribute , create_time , update_time , create_by , update_by, remark
+		from sys_channel u
+		where u.channel_name = #{channelName}
+	</select>
+
+
+		<delete id="deleteSysChannelById" parameterType="Long">
+			delete from sys_channel where channel_id = #{channelId}
+		</delete>
+
+		<delete id="batchDeleteSysChannel" parameterType="String">
+			delete from sys_channel where channel_id in
+			<foreach collection="array" item="channelId" open="(" separator="," close=")">
+				#{channelId}
+			</foreach>
+		</delete>
+
+		<update id="updateSysChannel" parameterType="com.ruoyi.project.system.channel.domain.SysChannel">
+			update sys_channel
+			<set>
+				<if test="channelName != null and channelName != ''">channel_name = #{channelName},</if>
+				<if test="channelSort != null and channelSort !=0">channel_sort = #{channelSort},</if>
+				<if test="channelAttribute != null and channelAttribute != ''">channel_attribute = #{channelAttribute},</if>
+				<if test="remark != null and remark != ''">remark = #{remark},</if>
+				<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+				update_time = sysdate()
+			</set>
+			where 1=1
+			<if test="channelId != null">and channel_id = #{channelId}</if>
+		</update>
+
+		<insert id="insertSysChannel" parameterType="com.ruoyi.project.system.channel.domain.SysChannel" useGeneratedKeys="true" keyProperty="channelId">
+			insert into sys_channel(
+			<if test="channelId != null and channelId != 0">channel_id,</if>
+			<if test="channelName != null and channelName != ''">channel_name,</if>
+			<if test="channelSort != null and channelSort !=0">channel_sort,</if>
+			<if test="channelAttribute != null and channelAttribute != ''">channel_attribute,</if>
+			<if test="remark != null and remark != ''">remark,</if>
+			<if test="createBy != null and createBy != ''">create_by,</if>
+			create_time
+			)values(
+			<if test="channelId != null and channelId != 0">#{productId},</if>
+			<if test="channelName != null and channelName != ''">#{channelName},</if>
+			<if test="channelSort != null and channelSort !=0">#{channelSort},</if>
+			<if test="channelAttribute != null and channelAttribute != ''">#{channelAttribute},</if>
+			<if test="remark != null and remark != ''">#{remark},</if>
+			<if test="createBy != null and createBy != ''">#{createBy},</if>
+			sysdate()
+			)
+		</insert>
+</mapper>

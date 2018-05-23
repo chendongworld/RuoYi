@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.deal.dao.SysDealDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.ruoyi.project.system.deal.domain.SysDeal">
+		<id column="deal_id" property="dealId" />
+		<result column="user_name" property="userName" />
+		<result column="channel_name" property="channelName" />
+		<result column="merchant_name" property="merchantName" />
+		<result column="product_name" property="productName" />
+		<result column="sum_money" property="sumMoney" />
+		<result column="sum_profit" property="sumProfit" />
+		<result column="user_profit" property="userProfit" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="create_by" property="createBy" />
+		<result column="update_by" property="updateBy" />
+		<result column="remark" property="remark" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        deal_id ,user_name,channel_name,merchant_name,product_name,sum_money,sum_profit,user_profit,create_time,update_time,create_by,update_by,remark
+    </sql>
+	<select id="selectSysDealAll" resultMap="BaseResultMap">
+		SELECT * from sys_deal ORDER BY create_time
+	</select>
+	<select id="selectSysDealById" parameterType="Long" resultMap="BaseResultMap">
+		select deal_id ,user_name,channel_name,merchant_name,product_name,sum_money,sum_profit,user_profit,create_time,update_time,create_by,update_by,remark
+		from sys_deal u
+		where u.deal_id = #{dealId}
+	</select>
+
+	<delete id="deleteSysDealById" parameterType="Long">
+		delete from sys_deal where deal_id = #{dealId}
+	</delete>
+
+	<delete id="batchDeleteSysDeal" parameterType="String">
+		delete from sys_deal where deal_id in
+		<foreach collection="array" item="dealId" open="(" separator="," close=")">
+			#{dealId}
+		</foreach>
+	</delete>
+
+	<update id="updateSysDeal" parameterType="com.ruoyi.project.system.deal.domain.SysDeal">
+		update sys_deal
+		<set>
+			<if test="userName != null and userName != ''">user_name = #{userName},</if>
+			<if test="channelName != null and channelName != ''">channel_name = #{channelName},</if>
+			<if test="merchantName != null and merchantName != ''">merchant_name = #{merchantName},</if>
+			<if test="productName != null and productName != ''">product_name = #{productName},</if>
+			<if test="sumMoney != null and sumMoney !=0">sum_money = #{sumMoney},</if>
+			<if test="sumProfit != null and sumProfit !=0">sum_profit = #{sumProfit},</if>
+			<if test="userProfit != null and userProfit !=0">user_profit = #{userProfit},</if>
+			<if test="remark != null and remark != ''">remark = #{remark},</if>
+			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+			update_time = sysdate()
+		</set>
+		where 1=1
+		<if test="dealId != null">and deal_id = #{dealId}</if>
+	</update>
+
+	<insert id="insertSysDeal" parameterType="com.ruoyi.project.system.deal.domain.SysDeal" useGeneratedKeys="true" keyProperty="channelId">
+		insert into sys_deal(
+		<if test="dealId != null and dealId != 0">deal_id,</if>
+		<if test="userName != null and userName != ''">user_name,</if>
+		<if test="channelName != null and channelName != ''">channel_name,</if>
+		<if test="merchantName != null and merchantName != ''">merchant_name,</if>
+		<if test="productName != null and productName != ''">product_name,</if>
+		<if test="sumMoney != null and sumMoney !=0">sum_money,</if>
+		<if test="sumProfit != null and sumProfit !=0">sum_profit,</if>
+		<if test="userProfit != null and userProfit !=0">user_profit,</if>
+		<if test="remark != null and remark != ''">remark,</if>
+		<if test="createBy != null and createBy != ''">create_by,</if>
+		create_time
+		)values(
+		<if test="dealId != null and dealId != 0">#{dealId},</if>
+		<if test="userName != null and userName != ''">#{userName},</if>
+		<if test="channelName != null and channelName != ''">#{channelName},</if>
+		<if test="merchantName != null and merchantName != ''">#{merchantName},</if>
+		<if test="productName != null and productName != ''">#{productName},</if>
+		<if test="sumMoney != null and sumMoney !=0">#{sumMoney},</if>
+		<if test="sumProfit != null and sumProfit !=0">#{sumProfit},</if>
+		<if test="userProfit != null and userProfit !=0">#{userProfit},</if>
+		<if test="remark != null and remark != ''">#{remark},</if>
+		<if test="createBy != null and createBy != ''">#{createBy},</if>
+		sysdate()
+		)
+	</insert>
+
+
+</mapper>

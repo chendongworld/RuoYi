@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css" rel="stylesheet">
+<link href="/ajax/libs/select/select2.css" rel="stylesheet">
+<body class="white-bg">
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+		<form class="form-horizontal m" id="form-role-edit">
+			<input id="productId" name="productId" type="hidden" th:value="${product.productId}"/>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label ">渠道名称：</label>
+				<div class="col-sm-8">
+					<!--<input class="form-control" type="text" name="channelName" id="channelName" th:value="${sysDeal.channelName}"/>-->
+					<select id="channelName" name="channelName" class="form-control select2-hidden-accessible" multiple="">
+						<option th:value="${product.channelName}" th:text="${product.channelName}" th:selected="${product.channelName}"></option>
+						<option th:each="channel:${channelList}"  th:value="${channel.channelName}" th:text="${channel.channelName}"></option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label ">产品名称：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" name="productName" id="roleName" th:value="${product.productName}"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label ">渠道成本%：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" name="channelCost" id="channelCost" th:value="${product.channelCost}"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">显示顺序：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" name="productSort" id="productSort" th:value="${product.productSort}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">产品属性：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" name="productAttribute" id="productAttribute" th:value="${product.productAttribute}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">备注：</label>
+				<div class="col-sm-8">
+					<input id="remark" name="remark" class="form-control" type="text" th:value="${product.remark}">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="form-control-static col-sm-offset-9">
+					<button type="submit" class="btn btn-primary" onclick="add()">提交</button>
+					<button th:onclick="'javascript:layer_close()'" class="btn btn-danger" type="button">关闭</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div th:include="include::footer"></div>
+	<script src="/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js"></script>
+	<script type="text/javascript" src="/ruoyi/system/product/edit.js">
+	</script>
+	<script  src="/ajax/libs/select/select2.js"></script>
+</body>
+</html>
