@@ -3,6 +3,14 @@
 	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
+<link href="/ajax/libs/select/select2.css" rel="stylesheet">
+
+<style>
+	td{
+		width: 20%;
+	}
+</style>
+
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
 		<div class="btn-group hidden-xs" id="tableToolbar" role="group">
@@ -14,8 +22,7 @@
 	        </button>
         </div>
 		<table class="bootstrap-table" data-mobile-responsive="true" 
-			   data-sort-name="role_sort" data-sort-order="asc">
-
+			   data-sort-name="create_time" data-sort-order="asc">
 		</table>
 	</div>
 	<div th:include="include :: footer"></div>
@@ -24,5 +31,54 @@
 		var editFlag = [[${@permissionService.hasPermi('system:deal:edit')}]];
 		var removeFlag = [[${@permissionService.hasPermi('system:deal:remove')}]];
 	</script>
+
+
+
+	<div style="width: 100%;display: inline-block;background-color:yellow; #0a6aa1;" >
+		<form class="" id="">
+			<table>
+				<tr>分类查询</tr>
+				<tr>
+					<td>开始时间:</td>
+					<td><input type="date" name="starttime" id="starttime"/></td>
+					<td></td>
+					<td>结束时间:</td>
+					<td><input type="date" name="overtime"  id="overtime"/></td>
+				</tr>
+				<tr>
+					<td>业务员：</td>
+					<td><select id="userName" name="userName" class="form-control select2-hidden-accessible" multiple="">
+						<option th:each="user:${userList}" th:value="${user.userName}" th:text="${user.userName}" ></option>
+					</select></td>
+					<td></td>
+					<td>渠道名称：</td>
+					<td>	<select id="channelName" name="channelName" class="form-control select2-hidden-accessible" multiple="">
+						<option th:each="channel:${channelList}"  th:value="${channel.channelName}" th:text="${channel.channelName}"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>产品名称： </td>
+					<td><select id="productName" name="productName" class="form-control select2-hidden-accessible" multiple="">
+						<option th:each="product:${productList}"  th:value="${product.productName}" th:text="${product.productName}"></option>
+					</select></td>
+					<td></td>
+					<td>商户名称：</td>
+					<td><select id="merchantName" name="merchantName" class="form-control select2-hidden-accessible" multiple="">
+						<option th:each="merchant:${merchantList}"  th:value="${merchant.merchantName}" th:text="${merchant.merchantName}"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td><button type="submit" class="btn btn-primary" style="align-content: center">查询</button></td>
+					<td></td>
+					<td></td>
+
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<script  src="/ajax/libs/select/select2.js"></script>
 </body>
 </html>

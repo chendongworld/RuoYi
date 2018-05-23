@@ -23,26 +23,48 @@
     <sql id="Base_Column_List">
         deal_id ,user_name,channel_name,merchant_name,product_name,sum_money,sum_profit,user_profit,create_time,update_time,create_by,update_by,remark
     </sql>
+
+	<!--查询所有交易-->
 	<select id="selectSysDealAll" resultMap="BaseResultMap">
 		SELECT * from sys_deal ORDER BY create_time
 	</select>
+	<!--根据条件查询-->
+	<select id="selectDealList" parameterType="com.ruoyi.project.system.deal.domain.SysDeal" resultMap="BaseResultMap">
+		deal_id ,user_name,channel_name,merchant_name,product_name,sum_money,sum_profit,user_profit,create_time,update_time,create_by,update_by,remark
+		from sys_deal
+		<where>
+			<if test="userName != null and userName != ''">
+				AND user_name = #{userName}
+			</if>
+			<if test="channelName != null and channelName != ''">
+				AND channel_name = #{channelName}
+			</if>
+			<if test="merchantName != null and merchantName != ''">
+				AND merchant_name = #{merchantName}
+			</if>
+			<if test="productName != null and productName != ''">
+				AND product_name = #{productName}
+			</if>
+		</where>
+	</select>
+	<!--根据id查询交易-->
 	<select id="selectSysDealById" parameterType="Long" resultMap="BaseResultMap">
 		select deal_id ,user_name,channel_name,merchant_name,product_name,sum_money,sum_profit,user_profit,create_time,update_time,create_by,update_by,remark
 		from sys_deal u
 		where u.deal_id = #{dealId}
 	</select>
-
+<!--根据id删除交易-->
 	<delete id="deleteSysDealById" parameterType="Long">
 		delete from sys_deal where deal_id = #{dealId}
 	</delete>
-
+<!--批量删除交易-->
 	<delete id="batchDeleteSysDeal" parameterType="String">
 		delete from sys_deal where deal_id in
 		<foreach collection="array" item="dealId" open="(" separator="," close=")">
 			#{dealId}
 		</foreach>
 	</delete>
-
+<!--修改-->
 	<update id="updateSysDeal" parameterType="com.ruoyi.project.system.deal.domain.SysDeal">
 		update sys_deal
 		<set>
@@ -60,7 +82,7 @@
 		where 1=1
 		<if test="dealId != null">and deal_id = #{dealId}</if>
 	</update>
-
+<!--新增-->
 	<insert id="insertSysDeal" parameterType="com.ruoyi.project.system.deal.domain.SysDeal" useGeneratedKeys="true" keyProperty="channelId">
 		insert into sys_deal(
 		<if test="dealId != null and dealId != 0">deal_id,</if>

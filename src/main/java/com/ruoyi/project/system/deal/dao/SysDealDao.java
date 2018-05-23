@@ -23,6 +23,13 @@ public interface SysDealDao {
     public List<SysDeal> selectSysDealAll();
 
     /**
+     * 根据条件查询
+     * @param sysDeal
+     * @return
+     */
+    public List<SysDeal> selectDealList(SysDeal sysDeal);
+
+    /**
      * 通过交易ID查询
      *
      * @param sysDealId 交易ID

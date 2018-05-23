@@ -48,8 +48,16 @@ public class SysDealController extends BaseController {
 
     @RequiresPermissions("system:deal:view")
     @GetMapping()
-    public String channel()
+    public String channel(Model model)
     {
+        List<User> userList = userService.selectUserAll();
+        model.addAttribute("userList",userList);
+        List<SysChannel> channelList = channelService.selectSysChannelAll();
+        model.addAttribute("channelList",channelList);
+        List<SysMerchant> merchantList = merchantService.selectSysMerchantAll();
+        model.addAttribute("merchantList",merchantList);
+        List<Product> productList = productService.selectProductAll();
+        model.addAttribute("productList",productList);
         return prefix + "/deal";
     }
 
@@ -58,8 +66,10 @@ public class SysDealController extends BaseController {
     @ResponseBody
     public TableDataInfo list(SysDeal deal)
     {
-//        setPageInfo(channel);
+        System.out.println(deal+"---------------------------------------------");
+        setPageInfo(deal);
         List<SysDeal> list = sysDealService.selectSysDealAll();
+//        List<SysDeal> list = sysDealService.selectDealList(deal);
         return getDataTable(list);
     }
 

@@ -12,8 +12,8 @@ $(function(){
     };
 
     var dots = {
-        nb: 750,
-        distance: 50,
+        nb: 1000,
+        distance: 60,
         d_radius: 100,
         array: []
     };

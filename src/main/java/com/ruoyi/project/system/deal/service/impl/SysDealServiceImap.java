@@ -44,6 +44,11 @@ public class SysDealServiceImap implements SysDealService {
     }
 
     @Override
+    public List<SysDeal> selectDealList(SysDeal sysDeal) {
+        return sysDealDao.selectDealList(sysDeal);
+    }
+
+    @Override
     public SysDeal selectSysDealById(Long sysDealId) {
         return sysDealDao.selectSysDealById(sysDealId);
     }
