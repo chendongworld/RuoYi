@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 14/05/2018 18:21:48
+ Date: 23/05/2018 12:22:17
 */
 
 SET NAMES utf8mb4;
@@ -147,7 +147,7 @@ CREATE TABLE `qrtz_scheduler_state`  (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('RuoyiScheduler', 'DESKTOP-2VNHCR21526282758634', 1526293233297, 15000);
+INSERT INTO `qrtz_scheduler_state` VALUES ('RuoyiScheduler', 'DESKTOP-2VNHCR21527048280474', 1527049334387, 15000);
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
@@ -226,7 +226,6 @@ DROP TABLE IF EXISTS `sys_channel`;
 CREATE TABLE `sys_channel`  (
   `channel_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '渠道id',
   `channel_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '渠道名称',
-  `channel_cost` int(5) NULL DEFAULT NULL COMMENT '渠道成本',
   `channel_sort` int(255) NULL DEFAULT NULL COMMENT '排序值',
   `channel_attribute` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '渠道属性',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
@@ -235,7 +234,12 @@ CREATE TABLE `sys_channel`  (
   `update_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '修改者',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`channel_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '渠道表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '渠道表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_channel
+-- ----------------------------
+INSERT INTO `sys_channel` VALUES (8, '二狗子支付', 1, '网银', '2018-05-21 11:59:29', NULL, 'zidong', NULL, '2');
 
 -- ----------------------------
 -- Table structure for sys_deal
@@ -243,20 +247,25 @@ CREATE TABLE `sys_channel`  (
 DROP TABLE IF EXISTS `sys_deal`;
 CREATE TABLE `sys_deal`  (
   `deal_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '交易id',
-  `user_name` int(11) NULL DEFAULT NULL COMMENT '业务员名称',
-  `channel_name` int(11) NULL DEFAULT NULL COMMENT '渠道名称',
-  `merchant_name` int(11) NULL DEFAULT NULL COMMENT '商户名称',
-  `product_name` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品名称',
+  `user_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '业务员名称',
+  `channel_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '渠道名称',
+  `merchant_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商户名称',
+  `product_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品名称',
   `sum_money` decimal(50, 2) NULL DEFAULT NULL COMMENT '总金额',
   `sum_profit` decimal(50, 2) NULL DEFAULT NULL COMMENT '总利润',
-  `user_profit` decimal(50, 0) NULL DEFAULT NULL COMMENT '业务员利润',
+  `user_profit` decimal(50, 2) NULL DEFAULT NULL COMMENT '业务员利润',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `create_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
-  `update_by` datetime(0) NULL DEFAULT NULL COMMENT '修改者',
+  `update_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '修改者',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`deal_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '交易表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '交易表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_deal
+-- ----------------------------
+INSERT INTO `sys_deal` VALUES (11, '子东', '二狗子支付', '8848', '二狗子支付网银支付', 10000.00, -30.00, -15.00, '2018-05-21 12:01:03', '2018-05-21 12:01:48', '子东', '子东', NULL);
 
 -- ----------------------------
 -- Table structure for sys_dept
@@ -403,7 +412,7 @@ CREATE TABLE `sys_logininfor`  (
   `msg` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '提示消息',
   `login_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 217 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 457 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -526,6 +535,246 @@ INSERT INTO `sys_logininfor` VALUES (213, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 
 INSERT INTO `sys_logininfor` VALUES (214, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-14 15:16:32');
 INSERT INTO `sys_logininfor` VALUES (215, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-14 15:26:11');
 INSERT INTO `sys_logininfor` VALUES (216, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-14 16:38:50');
+INSERT INTO `sys_logininfor` VALUES (217, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 17:27:42');
+INSERT INTO `sys_logininfor` VALUES (218, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 17:39:21');
+INSERT INTO `sys_logininfor` VALUES (219, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 17:51:12');
+INSERT INTO `sys_logininfor` VALUES (220, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 17:56:01');
+INSERT INTO `sys_logininfor` VALUES (221, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 17:59:02');
+INSERT INTO `sys_logininfor` VALUES (222, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 18:04:03');
+INSERT INTO `sys_logininfor` VALUES (223, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 18:11:13');
+INSERT INTO `sys_logininfor` VALUES (224, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 18:12:59');
+INSERT INTO `sys_logininfor` VALUES (225, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 18:15:18');
+INSERT INTO `sys_logininfor` VALUES (226, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 18:16:37');
+INSERT INTO `sys_logininfor` VALUES (227, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 18:17:36');
+INSERT INTO `sys_logininfor` VALUES (228, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 18:18:37');
+INSERT INTO `sys_logininfor` VALUES (229, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 18:20:45');
+INSERT INTO `sys_logininfor` VALUES (230, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-15 18:22:16');
+INSERT INTO `sys_logininfor` VALUES (231, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 09:40:29');
+INSERT INTO `sys_logininfor` VALUES (232, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 10:43:02');
+INSERT INTO `sys_logininfor` VALUES (233, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 10:49:24');
+INSERT INTO `sys_logininfor` VALUES (234, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 10:52:28');
+INSERT INTO `sys_logininfor` VALUES (235, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 10:59:34');
+INSERT INTO `sys_logininfor` VALUES (236, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 11:02:13');
+INSERT INTO `sys_logininfor` VALUES (237, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 11:20:32');
+INSERT INTO `sys_logininfor` VALUES (238, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 11:23:20');
+INSERT INTO `sys_logininfor` VALUES (239, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 16:02:24');
+INSERT INTO `sys_logininfor` VALUES (240, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 16:58:49');
+INSERT INTO `sys_logininfor` VALUES (241, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 17:01:39');
+INSERT INTO `sys_logininfor` VALUES (242, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 17:02:18');
+INSERT INTO `sys_logininfor` VALUES (243, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 17:03:18');
+INSERT INTO `sys_logininfor` VALUES (244, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 17:22:56');
+INSERT INTO `sys_logininfor` VALUES (245, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 17:29:44');
+INSERT INTO `sys_logininfor` VALUES (246, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 17:35:18');
+INSERT INTO `sys_logininfor` VALUES (247, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 17:41:45');
+INSERT INTO `sys_logininfor` VALUES (248, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 17:52:28');
+INSERT INTO `sys_logininfor` VALUES (249, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 17:56:26');
+INSERT INTO `sys_logininfor` VALUES (250, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 17:59:45');
+INSERT INTO `sys_logininfor` VALUES (251, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 18:00:45');
+INSERT INTO `sys_logininfor` VALUES (252, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 18:09:11');
+INSERT INTO `sys_logininfor` VALUES (253, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 18:29:37');
+INSERT INTO `sys_logininfor` VALUES (254, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 18:34:40');
+INSERT INTO `sys_logininfor` VALUES (255, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 18:35:23');
+INSERT INTO `sys_logininfor` VALUES (256, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-16 18:37:29');
+INSERT INTO `sys_logininfor` VALUES (257, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 10:31:35');
+INSERT INTO `sys_logininfor` VALUES (258, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 11:23:00');
+INSERT INTO `sys_logininfor` VALUES (259, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 11:24:41');
+INSERT INTO `sys_logininfor` VALUES (260, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 11:25:47');
+INSERT INTO `sys_logininfor` VALUES (261, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 11:29:10');
+INSERT INTO `sys_logininfor` VALUES (262, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 11:30:05');
+INSERT INTO `sys_logininfor` VALUES (263, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 11:31:42');
+INSERT INTO `sys_logininfor` VALUES (264, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 12:36:31');
+INSERT INTO `sys_logininfor` VALUES (265, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 12:39:18');
+INSERT INTO `sys_logininfor` VALUES (266, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 13:06:32');
+INSERT INTO `sys_logininfor` VALUES (267, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 13:08:23');
+INSERT INTO `sys_logininfor` VALUES (268, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 13:13:29');
+INSERT INTO `sys_logininfor` VALUES (269, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 13:15:57');
+INSERT INTO `sys_logininfor` VALUES (270, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 13:17:48');
+INSERT INTO `sys_logininfor` VALUES (271, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 13:21:26');
+INSERT INTO `sys_logininfor` VALUES (272, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 13:25:59');
+INSERT INTO `sys_logininfor` VALUES (273, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 18:23:45');
+INSERT INTO `sys_logininfor` VALUES (274, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 18:31:37');
+INSERT INTO `sys_logininfor` VALUES (275, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 18:42:15');
+INSERT INTO `sys_logininfor` VALUES (276, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 19:19:07');
+INSERT INTO `sys_logininfor` VALUES (277, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 19:23:25');
+INSERT INTO `sys_logininfor` VALUES (278, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 19:27:19');
+INSERT INTO `sys_logininfor` VALUES (279, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 19:29:28');
+INSERT INTO `sys_logininfor` VALUES (280, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 19:30:41');
+INSERT INTO `sys_logininfor` VALUES (281, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 19:33:05');
+INSERT INTO `sys_logininfor` VALUES (282, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 21:03:29');
+INSERT INTO `sys_logininfor` VALUES (283, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-17 21:04:20');
+INSERT INTO `sys_logininfor` VALUES (284, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 21:04:55');
+INSERT INTO `sys_logininfor` VALUES (285, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-17 21:05:01');
+INSERT INTO `sys_logininfor` VALUES (286, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-17 21:19:04');
+INSERT INTO `sys_logininfor` VALUES (287, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-17 21:19:37');
+INSERT INTO `sys_logininfor` VALUES (288, 'admin', '192.168.0.188', 'Chrome Mobile', 'Android Mobile', 0, '登录成功', '2018-05-17 21:21:18');
+INSERT INTO `sys_logininfor` VALUES (289, 'admin', '192.168.0.188', 'Chrome Mobile', 'Android Mobile', 0, '登录成功', '2018-05-17 21:23:36');
+INSERT INTO `sys_logininfor` VALUES (290, 'admin', '192.168.0.189', 'Chrome 39', 'Windows 7', 0, '登录成功', '2018-05-18 09:54:54');
+INSERT INTO `sys_logininfor` VALUES (291, 'admin', '192.168.0.189', 'Chrome 39', 'Windows 7', 0, '登录成功', '2018-05-18 09:55:05');
+INSERT INTO `sys_logininfor` VALUES (292, 'admin', '192.168.0.189', 'Chrome 39', 'Windows 7', 0, '登录成功', '2018-05-18 09:55:43');
+INSERT INTO `sys_logininfor` VALUES (293, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 10:09:43');
+INSERT INTO `sys_logininfor` VALUES (294, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 10:11:49');
+INSERT INTO `sys_logininfor` VALUES (295, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-18 10:33:23');
+INSERT INTO `sys_logininfor` VALUES (296, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 11:46:57');
+INSERT INTO `sys_logininfor` VALUES (297, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 14:04:50');
+INSERT INTO `sys_logininfor` VALUES (298, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 14:05:48');
+INSERT INTO `sys_logininfor` VALUES (299, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 14:06:41');
+INSERT INTO `sys_logininfor` VALUES (300, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 14:07:42');
+INSERT INTO `sys_logininfor` VALUES (301, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 14:38:57');
+INSERT INTO `sys_logininfor` VALUES (302, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-18 14:46:55');
+INSERT INTO `sys_logininfor` VALUES (303, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 14:46:58');
+INSERT INTO `sys_logininfor` VALUES (304, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 14:53:49');
+INSERT INTO `sys_logininfor` VALUES (305, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 15:00:57');
+INSERT INTO `sys_logininfor` VALUES (306, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 15:02:13');
+INSERT INTO `sys_logininfor` VALUES (307, 'admin', '192.168.0.186', 'Chrome 39', 'Windows 7', 0, '登录成功', '2018-05-18 15:06:12');
+INSERT INTO `sys_logininfor` VALUES (308, 'admin', '192.168.0.186', 'Chrome 39', 'Windows 7', 0, '退出成功', '2018-05-18 15:08:49');
+INSERT INTO `sys_logininfor` VALUES (309, 'admin', '192.168.0.186', 'Chrome 39', 'Windows 7', 0, '登录成功', '2018-05-18 15:09:20');
+INSERT INTO `sys_logininfor` VALUES (310, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 15:26:36');
+INSERT INTO `sys_logininfor` VALUES (311, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 15:46:39');
+INSERT INTO `sys_logininfor` VALUES (312, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 16:28:29');
+INSERT INTO `sys_logininfor` VALUES (313, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 16:37:10');
+INSERT INTO `sys_logininfor` VALUES (314, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 16:49:33');
+INSERT INTO `sys_logininfor` VALUES (315, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 16:58:49');
+INSERT INTO `sys_logininfor` VALUES (316, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 17:05:26');
+INSERT INTO `sys_logininfor` VALUES (317, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-18 17:19:19');
+INSERT INTO `sys_logininfor` VALUES (318, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 17:19:20');
+INSERT INTO `sys_logininfor` VALUES (319, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 17:34:48');
+INSERT INTO `sys_logininfor` VALUES (320, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 18:04:06');
+INSERT INTO `sys_logininfor` VALUES (321, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 18:11:39');
+INSERT INTO `sys_logininfor` VALUES (322, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 18:16:34');
+INSERT INTO `sys_logininfor` VALUES (323, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 18:20:45');
+INSERT INTO `sys_logininfor` VALUES (324, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 18:35:55');
+INSERT INTO `sys_logininfor` VALUES (325, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 18:58:35');
+INSERT INTO `sys_logininfor` VALUES (326, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 19:06:24');
+INSERT INTO `sys_logininfor` VALUES (327, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 19:14:15');
+INSERT INTO `sys_logininfor` VALUES (328, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 19:15:59');
+INSERT INTO `sys_logininfor` VALUES (329, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 19:18:46');
+INSERT INTO `sys_logininfor` VALUES (330, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 19:21:36');
+INSERT INTO `sys_logininfor` VALUES (331, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 20:41:04');
+INSERT INTO `sys_logininfor` VALUES (332, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 20:43:18');
+INSERT INTO `sys_logininfor` VALUES (333, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 20:47:46');
+INSERT INTO `sys_logininfor` VALUES (334, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 20:51:35');
+INSERT INTO `sys_logininfor` VALUES (335, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 20:53:50');
+INSERT INTO `sys_logininfor` VALUES (336, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-18 20:56:28');
+INSERT INTO `sys_logininfor` VALUES (337, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 10:05:06');
+INSERT INTO `sys_logininfor` VALUES (338, 'admin', '192.168.0.199', 'Chrome 39', 'Windows 7', 0, '登录成功', '2018-05-19 10:14:57');
+INSERT INTO `sys_logininfor` VALUES (339, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-19 10:33:45');
+INSERT INTO `sys_logininfor` VALUES (340, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 10:34:21');
+INSERT INTO `sys_logininfor` VALUES (341, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 10:35:56');
+INSERT INTO `sys_logininfor` VALUES (342, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 10:35:56');
+INSERT INTO `sys_logininfor` VALUES (343, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 10:37:03');
+INSERT INTO `sys_logininfor` VALUES (344, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 10:47:31');
+INSERT INTO `sys_logininfor` VALUES (345, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 10:51:50');
+INSERT INTO `sys_logininfor` VALUES (346, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 10:59:19');
+INSERT INTO `sys_logininfor` VALUES (347, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 11:06:30');
+INSERT INTO `sys_logininfor` VALUES (348, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 11:51:54');
+INSERT INTO `sys_logininfor` VALUES (349, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 11:54:53');
+INSERT INTO `sys_logininfor` VALUES (350, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 12:03:29');
+INSERT INTO `sys_logininfor` VALUES (351, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 12:27:08');
+INSERT INTO `sys_logininfor` VALUES (352, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 12:39:16');
+INSERT INTO `sys_logininfor` VALUES (353, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 12:53:47');
+INSERT INTO `sys_logininfor` VALUES (354, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 12:54:48');
+INSERT INTO `sys_logininfor` VALUES (355, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-19 13:03:08');
+INSERT INTO `sys_logininfor` VALUES (356, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-19 13:20:52');
+INSERT INTO `sys_logininfor` VALUES (357, 'admin', '192.168.0.186', 'Internet Explorer 11', 'Windows 10', 0, '登录成功', '2018-05-21 10:13:51');
+INSERT INTO `sys_logininfor` VALUES (358, 'admin', '192.168.0.186', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 10:21:32');
+INSERT INTO `sys_logininfor` VALUES (359, 'manman', '192.168.0.186', 'Chrome', 'Windows 10', 1, '密码输入错误1次，123456', '2018-05-21 10:21:42');
+INSERT INTO `sys_logininfor` VALUES (360, 'manman', '192.168.0.186', 'Chrome', 'Windows 10', 1, '密码输入错误2次，12345', '2018-05-21 10:21:50');
+INSERT INTO `sys_logininfor` VALUES (361, 'admin', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 10:22:10');
+INSERT INTO `sys_logininfor` VALUES (362, 'admin', '192.168.0.186', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 10:23:29');
+INSERT INTO `sys_logininfor` VALUES (363, 'manman', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 10:23:41');
+INSERT INTO `sys_logininfor` VALUES (364, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 10:46:06');
+INSERT INTO `sys_logininfor` VALUES (365, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 10:46:16');
+INSERT INTO `sys_logininfor` VALUES (366, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 10:46:19');
+INSERT INTO `sys_logininfor` VALUES (367, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 10:47:20');
+INSERT INTO `sys_logininfor` VALUES (368, 'manman', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 1, '密码输入错误1次，123456', '2018-05-21 10:47:29');
+INSERT INTO `sys_logininfor` VALUES (369, 'manman', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 1, '密码输入错误2次，12345', '2018-05-21 10:47:36');
+INSERT INTO `sys_logininfor` VALUES (370, 'manman', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 1, '密码输入错误3次，123456', '2018-05-21 10:47:40');
+INSERT INTO `sys_logininfor` VALUES (371, 'manman', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 1, '用户不存在/密码错误', '2018-05-21 10:47:44');
+INSERT INTO `sys_logininfor` VALUES (372, 'manman', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 1, '密码输入错误4次，manman123456', '2018-05-21 10:49:06');
+INSERT INTO `sys_logininfor` VALUES (373, 'manman', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 1, '密码输入错误5次，123456', '2018-05-21 10:49:16');
+INSERT INTO `sys_logininfor` VALUES (374, 'manman', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 1, '密码输入错误5次，帐户锁定10分钟', '2018-05-21 10:51:41');
+INSERT INTO `sys_logininfor` VALUES (375, 'manman', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 1, '密码输入错误5次，帐户锁定10分钟', '2018-05-21 10:51:50');
+INSERT INTO `sys_logininfor` VALUES (376, 'manman', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 1, '密码输入错误5次，帐户锁定10分钟', '2018-05-21 10:51:52');
+INSERT INTO `sys_logininfor` VALUES (377, 'manman', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 1, '密码输入错误5次，帐户锁定10分钟', '2018-05-21 10:51:53');
+INSERT INTO `sys_logininfor` VALUES (378, 'manman', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 1, '密码输入错误5次，帐户锁定10分钟', '2018-05-21 10:51:53');
+INSERT INTO `sys_logininfor` VALUES (379, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 10:52:27');
+INSERT INTO `sys_logininfor` VALUES (380, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 10:54:29');
+INSERT INTO `sys_logininfor` VALUES (381, 'zidong', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 10:54:36');
+INSERT INTO `sys_logininfor` VALUES (382, 'zidong', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 10:57:30');
+INSERT INTO `sys_logininfor` VALUES (383, 'manman', '192.168.0.186', 'Chrome', 'Windows 10', 1, '密码输入错误1次，123456', '2018-05-21 10:58:32');
+INSERT INTO `sys_logininfor` VALUES (384, 'zidong', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 10:58:52');
+INSERT INTO `sys_logininfor` VALUES (385, 'zidong', '192.168.0.186', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 11:02:07');
+INSERT INTO `sys_logininfor` VALUES (386, 'admin', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 11:02:25');
+INSERT INTO `sys_logininfor` VALUES (387, 'admin', '192.168.0.186', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 11:07:08');
+INSERT INTO `sys_logininfor` VALUES (388, 'admin', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 11:07:10');
+INSERT INTO `sys_logininfor` VALUES (389, 'admin', '192.168.0.186', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 11:10:38');
+INSERT INTO `sys_logininfor` VALUES (390, 'manman', '192.168.0.186', 'Chrome', 'Windows 10', 1, '密码输入错误1次，123456', '2018-05-21 11:10:55');
+INSERT INTO `sys_logininfor` VALUES (391, 'zidong', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 11:11:09');
+INSERT INTO `sys_logininfor` VALUES (392, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 11:29:10');
+INSERT INTO `sys_logininfor` VALUES (393, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 11:34:02');
+INSERT INTO `sys_logininfor` VALUES (394, 'manman', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 11:34:08');
+INSERT INTO `sys_logininfor` VALUES (395, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 11:39:17');
+INSERT INTO `sys_logininfor` VALUES (396, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 11:40:57');
+INSERT INTO `sys_logininfor` VALUES (397, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 11:48:28');
+INSERT INTO `sys_logininfor` VALUES (398, 'admin', '192.168.0.186', 'Chrome', 'Windows 10', 1, '密码输入错误1次，123456\\', '2018-05-21 11:58:30');
+INSERT INTO `sys_logininfor` VALUES (399, 'zidong', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 11:58:43');
+INSERT INTO `sys_logininfor` VALUES (400, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 14:18:29');
+INSERT INTO `sys_logininfor` VALUES (401, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 15:53:50');
+INSERT INTO `sys_logininfor` VALUES (402, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 16:04:16');
+INSERT INTO `sys_logininfor` VALUES (403, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 16:37:54');
+INSERT INTO `sys_logininfor` VALUES (404, 'manman', '192.168.0.189', 'Chrome 39', 'Windows 7', 0, '登录成功', '2018-05-21 16:58:13');
+INSERT INTO `sys_logininfor` VALUES (405, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 17:07:08');
+INSERT INTO `sys_logininfor` VALUES (406, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 17:10:49');
+INSERT INTO `sys_logininfor` VALUES (407, 'manman', '192.168.0.189', 'Chrome 39', 'Windows 7', 0, '登录成功', '2018-05-21 17:17:55');
+INSERT INTO `sys_logininfor` VALUES (408, 'manman', '192.168.0.144', 'Chrome Mobile', 'Android Mobile', 0, '登录成功', '2018-05-21 17:39:41');
+INSERT INTO `sys_logininfor` VALUES (409, 'manman', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 17:55:29');
+INSERT INTO `sys_logininfor` VALUES (410, 'manman', '192.168.0.186', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 18:00:54');
+INSERT INTO `sys_logininfor` VALUES (411, 'admin', '192.168.0.186', 'Chrome', 'Windows 10', 1, '密码输入错误1次，123456', '2018-05-21 18:01:05');
+INSERT INTO `sys_logininfor` VALUES (412, 'admin', '192.168.0.186', 'Chrome', 'Windows 10', 1, '密码输入错误2次，123456', '2018-05-21 18:01:10');
+INSERT INTO `sys_logininfor` VALUES (413, 'admin', '192.168.0.186', 'Chrome', 'Windows 10', 1, '密码输入错误3次，123456', '2018-05-21 18:01:16');
+INSERT INTO `sys_logininfor` VALUES (414, 'zidong', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 18:01:26');
+INSERT INTO `sys_logininfor` VALUES (415, 'admin', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 18:05:15');
+INSERT INTO `sys_logininfor` VALUES (416, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 18:09:06');
+INSERT INTO `sys_logininfor` VALUES (417, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-21 20:24:31');
+INSERT INTO `sys_logininfor` VALUES (418, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-21 20:26:33');
+INSERT INTO `sys_logininfor` VALUES (419, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:00:20');
+INSERT INTO `sys_logininfor` VALUES (420, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:00:20');
+INSERT INTO `sys_logininfor` VALUES (421, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-22 17:00:33');
+INSERT INTO `sys_logininfor` VALUES (422, '', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 1, '* 必须填写', '2018-05-22 17:01:04');
+INSERT INTO `sys_logininfor` VALUES (423, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:01:18');
+INSERT INTO `sys_logininfor` VALUES (424, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:01:18');
+INSERT INTO `sys_logininfor` VALUES (425, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-22 17:01:23');
+INSERT INTO `sys_logininfor` VALUES (426, '', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 1, '* 必须填写', '2018-05-22 17:01:40');
+INSERT INTO `sys_logininfor` VALUES (427, 'manman', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:11:37');
+INSERT INTO `sys_logininfor` VALUES (428, 'manman', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:11:37');
+INSERT INTO `sys_logininfor` VALUES (429, 'manman', '192.168.0.186', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-22 17:13:32');
+INSERT INTO `sys_logininfor` VALUES (430, 'zidong', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:25:31');
+INSERT INTO `sys_logininfor` VALUES (431, 'zidong', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:36:02');
+INSERT INTO `sys_logininfor` VALUES (432, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:40:27');
+INSERT INTO `sys_logininfor` VALUES (433, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:40:27');
+INSERT INTO `sys_logininfor` VALUES (434, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-22 17:41:54');
+INSERT INTO `sys_logininfor` VALUES (435, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:42:08');
+INSERT INTO `sys_logininfor` VALUES (436, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:42:08');
+INSERT INTO `sys_logininfor` VALUES (437, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-22 17:44:58');
+INSERT INTO `sys_logininfor` VALUES (438, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:45:19');
+INSERT INTO `sys_logininfor` VALUES (439, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 17:45:19');
+INSERT INTO `sys_logininfor` VALUES (440, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-22 17:49:42');
+INSERT INTO `sys_logininfor` VALUES (441, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 18:10:55');
+INSERT INTO `sys_logininfor` VALUES (442, 'zidong', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 18:12:08');
+INSERT INTO `sys_logininfor` VALUES (443, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-22 18:19:27');
+INSERT INTO `sys_logininfor` VALUES (444, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 18:24:28');
+INSERT INTO `sys_logininfor` VALUES (445, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '退出成功', '2018-05-22 19:05:50');
+INSERT INTO `sys_logininfor` VALUES (446, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 19:28:54');
+INSERT INTO `sys_logininfor` VALUES (447, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 19:56:42');
+INSERT INTO `sys_logininfor` VALUES (448, 'zidong', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 20:17:48');
+INSERT INTO `sys_logininfor` VALUES (449, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 20:28:53');
+INSERT INTO `sys_logininfor` VALUES (450, 'zidong', '192.168.0.186', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-22 20:47:25');
+INSERT INTO `sys_logininfor` VALUES (451, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-23 10:07:10');
+INSERT INTO `sys_logininfor` VALUES (452, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-23 10:49:43');
+INSERT INTO `sys_logininfor` VALUES (453, 'manman', '192.168.0.189', 'Chrome 39', 'Windows 7', 0, '登录成功', '2018-05-23 11:30:02');
+INSERT INTO `sys_logininfor` VALUES (454, 'manman', '192.168.0.189', 'Microsoft Edge 12', 'Windows 10', 0, '登录成功', '2018-05-23 11:30:50');
+INSERT INTO `sys_logininfor` VALUES (455, 'admin', '0:0:0:0:0:0:0:1', 'Chrome', 'Windows 10', 0, '登录成功', '2018-05-23 11:32:13');
+INSERT INTO `sys_logininfor` VALUES (456, 'manman', '192.168.0.189', 'Internet Explorer 11', 'Windows 10', 0, '登录成功', '2018-05-23 11:33:30');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -547,7 +796,7 @@ CREATE TABLE `sys_menu`  (
   `update_time` timestamp(0) NOT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 94 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -555,13 +804,13 @@ CREATE TABLE `sys_menu`  (
 INSERT INTO `sys_menu` VALUES (1, '系统管理', 0, 1, '#', 'M', 0, '', 'fa fa-gear', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '系统管理目录');
 INSERT INTO `sys_menu` VALUES (2, '系统监控', 0, 2, '#', 'M', 0, '', 'fa fa-video-camera', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '系统监控目录');
 INSERT INTO `sys_menu` VALUES (3, '系统工具', 0, 3, '#', 'M', 0, '', 'fa fa-bars', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '系统工具目录');
-INSERT INTO `sys_menu` VALUES (4, '用户管理', 1, 1, '/system/user', 'C', 0, 'system:user:view', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '用户管理菜单');
-INSERT INTO `sys_menu` VALUES (5, '角色管理', 1, 2, '/system/role', 'C', 0, 'system:role:view', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '角色管理菜单');
-INSERT INTO `sys_menu` VALUES (6, '菜单管理', 1, 3, '/system/menu', 'C', 0, 'system:menu:view', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '菜单管理菜单');
-INSERT INTO `sys_menu` VALUES (7, '部门管理', 1, 4, '/system/dept', 'C', 0, 'system:dept:view', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '部门管理菜单');
-INSERT INTO `sys_menu` VALUES (8, '岗位管理', 1, 5, '/system/post', 'C', 0, 'system:post:view', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '岗位管理菜单');
-INSERT INTO `sys_menu` VALUES (9, '字典管理', 1, 6, '/system/dict', 'C', 0, 'system:dict:view', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '字典管理菜单');
-INSERT INTO `sys_menu` VALUES (10, '参数设置', 1, 7, '/system/config', 'C', 0, 'system:config:view', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '参数设置菜单');
+INSERT INTO `sys_menu` VALUES (4, '用户管理', 1, 5, '/system/user', 'C', 0, 'system:user:view', '#', 'admin', '2018-05-19 13:16:11', 'admin', '2018-05-19 13:16:11', '用户管理菜单');
+INSERT INTO `sys_menu` VALUES (5, '角色管理', 1, 6, '/system/role', 'C', 0, 'system:role:view', '#', 'admin', '2018-05-19 13:16:21', 'admin', '2018-05-19 13:16:21', '角色管理菜单');
+INSERT INTO `sys_menu` VALUES (6, '菜单管理', 1, 7, '/system/menu', 'C', 0, 'system:menu:view', '#', 'admin', '2018-05-19 13:16:32', 'admin', '2018-05-19 13:16:32', '菜单管理菜单');
+INSERT INTO `sys_menu` VALUES (7, '部门管理', 1, 8, '/system/dept', 'C', 0, 'system:dept:view', '#', 'admin', '2018-05-19 13:16:46', 'admin', '2018-05-19 13:16:46', '部门管理菜单');
+INSERT INTO `sys_menu` VALUES (8, '岗位管理', 1, 9, '/system/post', 'C', 0, 'system:post:view', '#', 'admin', '2018-05-19 13:16:57', 'admin', '2018-05-19 13:16:57', '岗位管理菜单');
+INSERT INTO `sys_menu` VALUES (9, '字典管理', 1, 9, '/system/dict', 'C', 0, 'system:dict:view', '#', 'admin', '2018-05-19 13:17:15', 'admin', '2018-05-19 13:17:15', '字典管理菜单');
+INSERT INTO `sys_menu` VALUES (10, '参数设置', 1, 9, '/system/config', 'C', 0, 'system:config:view', '#', 'admin', '2018-05-19 13:17:23', 'admin', '2018-05-19 13:17:23', '参数设置菜单');
 INSERT INTO `sys_menu` VALUES (11, '操作日志', 2, 1, '/monitor/operlog', 'C', 0, 'monitor:operlog:view', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '操作日志菜单');
 INSERT INTO `sys_menu` VALUES (12, '登录日志', 2, 2, '/monitor/logininfor', 'C', 0, 'monitor:logininfor:view', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '登录日志菜单');
 INSERT INTO `sys_menu` VALUES (13, '在线用户', 2, 3, '/monitor/online', 'C', 0, 'monitor:online:view', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '在线用户菜单');
@@ -617,13 +866,34 @@ INSERT INTO `sys_menu` VALUES (62, '任务删除', 14, 4, '#', 'F', 0, 'monitor:
 INSERT INTO `sys_menu` VALUES (63, '任务保存', 14, 5, '#', 'F', 0, 'monitor:job:save', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '');
 INSERT INTO `sys_menu` VALUES (64, '状态修改', 14, 6, '#', 'F', 0, 'monitor:job:changeStatus', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '');
 INSERT INTO `sys_menu` VALUES (65, '批量删除', 14, 7, '#', 'F', 0, 'monitor:job:batchRemove', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '');
-INSERT INTO `sys_menu` VALUES (66, '交易管理', 1, 1, '#', 'C', 0, '', 'fa fa-diamond', 'admin', '2018-05-09 14:35:22', 'admin', '2018-05-09 14:35:22', '');
-INSERT INTO `sys_menu` VALUES (67, '交易明细', 66, 1, '#', 'F', 0, '', '', 'admin', '2018-05-10 10:18:17', 'admin', '2018-05-10 10:18:17', '');
-INSERT INTO `sys_menu` VALUES (68, '产品管理', 1, 1, '/system/product', 'C', 0, 'system:product:view', '', 'admin', '2018-05-11 16:40:50', '', '2018-05-11 16:40:48', '');
-INSERT INTO `sys_menu` VALUES (69, '产品查询', 68, 1, '', 'F', 0, 'system:product:list', '', 'admin', '2018-05-11 16:40:53', '', '2018-05-11 16:40:51', '');
-INSERT INTO `sys_menu` VALUES (70, '产品新增', 68, 1, '', 'F', 0, 'system:product:add', '', 'admin', '2018-05-11 16:40:56', '', '2018-05-11 16:40:54', '');
-INSERT INTO `sys_menu` VALUES (71, '产品修改', 68, 1, '/system/product/edit', 'F', 0, 'system:product:edit', '', 'admin', '2018-05-12 13:28:06', 'admin', '2018-05-12 13:28:06', '');
-INSERT INTO `sys_menu` VALUES (72, '产品删除', 68, 1, '', 'F', 0, 'system:product:remove', '', 'admin', '2018-05-11 16:41:03', '', '2018-05-11 16:41:00', '');
+INSERT INTO `sys_menu` VALUES (66, '交易管理', 1, 1, '/system/deal', 'C', 0, 'system:deal:view', 'fa fa-diamond', 'admin', '2018-05-17 18:24:42', 'admin', '2018-05-17 18:24:42', '');
+INSERT INTO `sys_menu` VALUES (67, '交易查询', 66, 1, '#', 'F', 0, 'system:deal:list', '', 'admin', '2018-05-17 18:25:33', 'admin', '2018-05-17 18:25:33', '');
+INSERT INTO `sys_menu` VALUES (68, '产品管理', 1, 3, '/system/product', 'C', 0, 'system:product:view', '', 'admin', '2018-05-19 13:18:06', 'admin', '2018-05-19 13:18:06', '');
+INSERT INTO `sys_menu` VALUES (69, '产品查询', 68, 1, '#', 'F', 0, 'system:product:list', '', 'admin', '2018-05-16 17:19:52', '', '2018-05-11 16:40:51', '');
+INSERT INTO `sys_menu` VALUES (70, '产品新增', 68, 2, '#', 'F', 0, 'system:product:add', '#', 'admin', '2018-05-16 17:25:45', 'admin', '2018-05-16 17:25:45', '');
+INSERT INTO `sys_menu` VALUES (71, '产品修改', 68, 3, '#', 'F', 0, 'system:product:edit', '#', 'admin', '2018-05-16 17:26:04', 'admin', '2018-05-16 17:26:04', '');
+INSERT INTO `sys_menu` VALUES (72, '产品删除', 68, 4, '#', 'F', 0, 'system:product:remove', '', 'admin', '2018-05-16 17:26:37', 'admin', '2018-05-16 17:26:37', '');
+INSERT INTO `sys_menu` VALUES (73, '产品保存', 68, 5, '', 'F', 0, 'system:product:save', '', 'admin', '2018-05-17 10:32:52', '', '0000-00-00 00:00:00', '');
+INSERT INTO `sys_menu` VALUES (74, '批量删除', 68, 6, '', 'F', 0, 'system:product:batchRemove', '', 'admin', '2018-05-17 11:28:48', '', '0000-00-00 00:00:00', '');
+INSERT INTO `sys_menu` VALUES (75, '渠道管理', 1, 2, '/system/channel', 'C', 0, 'system:channel:view', 'fa fa-cogs', 'admin', '2018-05-19 13:17:55', 'admin', '2018-05-19 13:17:55', '');
+INSERT INTO `sys_menu` VALUES (76, '新增渠道', 75, 2, '', 'F', 0, 'system:channel:add', '', 'admin', '2018-05-17 11:58:44', 'admin', '2018-05-17 11:58:44', '');
+INSERT INTO `sys_menu` VALUES (77, '查询渠道', 75, 1, '', 'F', 0, 'system:channel:list', '', 'admin', '2018-05-17 12:00:20', 'admin', '2018-05-17 12:00:20', '');
+INSERT INTO `sys_menu` VALUES (78, '修改渠道', 75, 3, '', 'F', 0, 'system:channel:edit', '', 'admin', '2018-05-18 14:46:46', '', '2018-05-18 14:46:44', '');
+INSERT INTO `sys_menu` VALUES (79, '删除渠道', 75, 4, '', 'F', 0, 'system:channel:remove', '', 'admin', '2018-05-18 14:46:43', '', '2018-05-18 14:46:42', '');
+INSERT INTO `sys_menu` VALUES (80, '保存渠道', 75, 5, '', 'F', 0, 'system:channel:save', '', 'admin', '2018-05-18 14:46:41', '', '2018-05-18 14:46:39', '');
+INSERT INTO `sys_menu` VALUES (81, '批量删除', 75, 6, '', 'F', 0, 'system:channel:batchRemove', '', 'admin', '2018-05-18 14:46:38', '', '2018-05-18 14:46:37', '');
+INSERT INTO `sys_menu` VALUES (82, '交易新增', 66, 2, '', 'F', 0, 'system:deal:add', '', 'admin', '2018-05-18 14:46:36', '', '2018-05-18 14:46:34', '');
+INSERT INTO `sys_menu` VALUES (83, '交易修改', 66, 3, '', 'F', 0, 'system:deal:edit', '', 'admin', '2018-05-18 14:46:33', '', '2018-05-18 14:46:31', '');
+INSERT INTO `sys_menu` VALUES (84, '交易删除', 66, 4, '', 'F', 0, 'system:deal:remove', '', 'admin', '2018-05-18 14:46:30', '', '2018-05-18 14:46:28', '');
+INSERT INTO `sys_menu` VALUES (85, '交易保存', 66, 5, '', 'F', 0, 'system:deal:save', '', 'admin', '2018-05-18 14:46:27', '', '2018-05-18 14:46:24', '');
+INSERT INTO `sys_menu` VALUES (86, '批量删除', 66, 6, '', 'F', 0, 'system:deal:batchRemove', '', 'admin', '2018-05-18 14:46:22', '', '2018-05-18 14:46:20', '');
+INSERT INTO `sys_menu` VALUES (87, '商户管理', 1, 4, '/system/merchant', 'C', 0, 'system:merchant:view', '', 'admin', '2018-05-19 13:18:21', 'admin', '2018-05-19 13:18:21', '');
+INSERT INTO `sys_menu` VALUES (88, '查询商户', 87, 1, '', 'F', 0, 'system:merchant:list', '', 'admin', '2018-05-18 14:46:16', '', '2018-05-18 14:46:14', '');
+INSERT INTO `sys_menu` VALUES (89, '新增商户', 87, 2, '', 'F', 0, 'system:merchant:add', '', 'admin', '2018-05-18 14:46:13', '', '2018-05-18 14:46:12', '');
+INSERT INTO `sys_menu` VALUES (90, '修改商户', 87, 3, '', 'F', 0, 'system:merchant:edit', '', 'admin', '2018-05-18 14:46:11', '', '2018-05-18 14:46:09', '');
+INSERT INTO `sys_menu` VALUES (91, '删除商户', 87, 4, '', 'F', 0, 'system:merchant:remove', '', 'admin', '2018-05-18 14:46:08', '', '2018-05-18 14:46:07', '');
+INSERT INTO `sys_menu` VALUES (92, '保存商户', 87, 5, '', 'F', 0, 'system:merchant:save', '', 'admin', '2018-05-18 14:46:06', '', '2018-05-18 14:46:04', '');
+INSERT INTO `sys_menu` VALUES (93, '批量删除', 87, 6, '', 'F', 0, 'system:merchant:batchRemove', '', 'admin', '2018-05-18 14:46:03', '', '2018-05-18 14:46:02', '');
 
 -- ----------------------------
 -- Table structure for sys_merchant
@@ -631,11 +901,11 @@ INSERT INTO `sys_menu` VALUES (72, '产品删除', 68, 1, '', 'F', 0, 'system:pr
 DROP TABLE IF EXISTS `sys_merchant`;
 CREATE TABLE `sys_merchant`  (
   `merchant_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商户id',
-  `user_id` int(11) NULL DEFAULT NULL COMMENT '业务对接人id',
+  `user_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '业务对接人',
   `merchant_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商户名称',
   `merchant_sort` int(255) NULL DEFAULT NULL COMMENT '排序值',
-  `merchant_rate` int(5) NULL DEFAULT NULL COMMENT '商户费率',
-  `royalty_rate` int(5) NULL DEFAULT NULL COMMENT '业务提成比率',
+  `merchant_rate` decimal(5, 2) NULL DEFAULT NULL COMMENT '商户费率',
+  `royalty_rate` decimal(5, 2) NULL DEFAULT NULL COMMENT '业务提成比率',
   `merchant_attribute` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '渠道属性',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
@@ -643,7 +913,12 @@ CREATE TABLE `sys_merchant`  (
   `update_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '修改者',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`merchant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商户表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_merchant
+-- ----------------------------
+INSERT INTO `sys_merchant` VALUES (7, '子东', '8848', 1, 0.30, 50.00, NULL, '2018-05-21 12:00:41', NULL, '子东', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_oper_log
@@ -664,7 +939,7 @@ CREATE TABLE `sys_oper_log`  (
   `error_msg` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '错误消息',
   `oper_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '操作时间',
   PRIMARY KEY (`oper_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -677,6 +952,9 @@ INSERT INTO `sys_oper_log` VALUES (5, '系统管理', '角色管理-保存角色
 INSERT INTO `sys_oper_log` VALUES (6, '系统管理', '角色管理-保存角色', 'com.ruoyi.project.system.role.controller.RoleController.save()', 'web', 'admin', '技术', '/system/role/save', '0:0:0:0:0:0:0:1', '{\"roleId\":[\"1\"],\"roleName\":[\"开发账号\"],\"roleKey\":[\"admin\"],\"roleSort\":[\"1\"],\"status\":[\"0\"],\"remark\":[\"\"],\"menuIds\":[\"1,4,17,18,19,20,21,22,23,5,24,25,26,27,28,29,6,30,31,32,33,34,7,35,36,37,38,39,8,40,41,42,43,44,45,9,46,47,48,49,50,2,11,51,52,53,12,54,55,13', 0, NULL, '2018-05-11 17:41:27');
 INSERT INTO `sys_oper_log` VALUES (7, '系统管理', '角色管理-保存角色', 'com.ruoyi.project.system.role.controller.RoleController.save()', 'web', 'admin', '技术', '/system/role/save', '0:0:0:0:0:0:0:1', '{\"roleId\":[\"1\"],\"roleName\":[\"开发账号\"],\"roleKey\":[\"admin\"],\"roleSort\":[\"1\"],\"status\":[\"0\"],\"remark\":[\"\"],\"menuIds\":[\"1,4,17,18,19,20,21,22,23,5,24,25,26,27,28,29,6,30,31,32,33,34,7,35,36,37,38,39,8,40,41,42,43,44,45,2,11,51,52,53,12,54,55,13,56,57,58,14,59,6', 0, NULL, '2018-05-11 17:41:55');
 INSERT INTO `sys_oper_log` VALUES (8, '系统管理', '角色管理-保存角色', 'com.ruoyi.project.system.role.controller.RoleController.save()', 'web', 'admin', '技术', '/system/role/save', '0:0:0:0:0:0:0:1', '{\"roleId\":[\"1\"],\"roleName\":[\"开发账号\"],\"roleKey\":[\"admin\"],\"roleSort\":[\"1\"],\"status\":[\"0\"],\"remark\":[\"\"],\"menuIds\":[\"1,4,17,18,19,20,21,22,23,5,24,25,26,27,28,29,6,30,31,32,33,34,7,35,36,37,38,39,8,40,41,42,43,44,45,68,69,70,71,72,2,11,51,52,53,12,54,55,13,5', 0, NULL, '2018-05-11 17:43:42');
+INSERT INTO `sys_oper_log` VALUES (9, '系统管理', '角色管理-保存角色', 'com.ruoyi.project.system.role.controller.RoleController.save()', 'web', 'admin', '技术', '/system/role/save', '0:0:0:0:0:0:0:1', '{\"roleId\":[\"1\"],\"roleName\":[\"开发账号\"],\"roleKey\":[\"admin\"],\"roleSort\":[\"1\"],\"status\":[\"0\"],\"remark\":[\"\"],\"menuIds\":[\"1,4,17,18,19,20,21,22,23,5,24,25,26,27,28,29,6,30,31,32,33,34,7,35,36,37,38,39,8,40,41,42,43,44,45,68,69,70,71,72,75,76,77,78,79,80,81,2,11,5', 0, NULL, '2018-05-17 12:10:55');
+INSERT INTO `sys_oper_log` VALUES (10, '系统管理', '角色管理-保存角色', 'com.ruoyi.project.system.role.controller.RoleController.save()', 'web', 'admin', '技术', '/system/role/save', '0:0:0:0:0:0:0:1', '{\"roleId\":[\"1\"],\"roleName\":[\"开发账号\"],\"roleKey\":[\"admin\"],\"roleSort\":[\"1\"],\"status\":[\"0\"],\"remark\":[\"\"],\"menuIds\":[\"1,4,17,18,19,20,21,22,23,5,24,25,26,27,28,29,6,30,31,32,33,34,7,35,36,37,38,39,8,40,41,42,43,44,45,66,67,82,83,84,85,86,68,69,70,71,72,75,76,', 0, NULL, '2018-05-17 18:29:35');
+INSERT INTO `sys_oper_log` VALUES (11, '系统管理', '角色管理-保存角色', 'com.ruoyi.project.system.role.controller.RoleController.save()', 'web', 'admin', '技术', '/system/role/save', '0:0:0:0:0:0:0:1', '{\"roleId\":[\"1\"],\"roleName\":[\"开发账号\"],\"roleKey\":[\"admin\"],\"roleSort\":[\"1\"],\"status\":[\"0\"],\"remark\":[\"\"],\"menuIds\":[\"1,4,17,18,19,20,21,22,23,5,24,25,26,27,28,29,6,30,31,32,33,34,7,35,36,37,38,39,8,40,41,42,43,44,45,66,67,82,83,84,85,86,68,69,70,71,72,75,76,', 0, NULL, '2018-05-18 14:45:15');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -700,7 +978,7 @@ CREATE TABLE `sys_post`  (
 -- Records of sys_post
 -- ----------------------------
 INSERT INTO `sys_post` VALUES (1, 'ceo', '董事长', 1, 0, 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '');
-INSERT INTO `sys_post` VALUES (2, 'se', '项目经理', 2, 0, 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '');
+INSERT INTO `sys_post` VALUES (2, 'se', '经理', 2, 0, 'admin', '2018-05-21 10:53:33', 'admin', '2018-05-21 10:53:33', '');
 INSERT INTO `sys_post` VALUES (3, 'hr', '人力资源', 3, 0, 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '');
 INSERT INTO `sys_post` VALUES (4, 'user', '普通员工', 4, 0, 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', '');
 
@@ -710,7 +988,9 @@ INSERT INTO `sys_post` VALUES (4, 'user', '普通员工', 4, 0, 'admin', '2018-0
 DROP TABLE IF EXISTS `sys_product`;
 CREATE TABLE `sys_product`  (
   `product_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '产品id',
+  `channel_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '渠道名称',
   `product_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品名称',
+  `channel_cost` decimal(10, 2) NULL DEFAULT NULL COMMENT '渠道成本',
   `product_sort` int(2) NULL DEFAULT NULL COMMENT '排序值',
   `product_attribute` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品属性',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
@@ -719,12 +999,12 @@ CREATE TABLE `sys_product`  (
   `update_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '修改者',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`product_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '产品表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '产品表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_product
 -- ----------------------------
-INSERT INTO `sys_product` VALUES (1, 'aaa', 1, '阿斯顿', '2018-05-14 10:55:05', NULL, NULL, NULL, '代付');
+INSERT INTO `sys_product` VALUES (16, '二狗子支付', '二狗子支付网银支付', 0.60, 1, NULL, '2018-05-21 11:59:51', NULL, 'zidong', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -747,9 +1027,9 @@ CREATE TABLE `sys_role`  (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES (1, '开发账号', 'admin', 1, 0, 'admin', '2018-05-11 17:43:42', 'admin', '2018-05-11 17:43:42', '管理员');
+INSERT INTO `sys_role` VALUES (1, '开发账号', 'admin', 1, 0, 'admin', '2018-05-18 14:45:14', 'admin', '2018-05-18 14:45:14', '管理员');
 INSERT INTO `sys_role` VALUES (2, '普通账号', 'common', 3, 0, 'admin', '2018-05-10 18:08:13', 'admin', '2018-05-10 18:08:13', '普通角色');
-INSERT INTO `sys_role` VALUES (3, '管理账号', 'common', 2, 0, 'admin', '2018-05-10 18:07:18', 'admin', '2018-05-10 18:07:18', '');
+INSERT INTO `sys_role` VALUES (3, '管理账号', 'common', 2, 0, 'admin', '2018-05-21 10:21:18', 'admin', '2018-05-21 10:21:18', '管理账号');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -822,11 +1102,32 @@ INSERT INTO `sys_role_menu` VALUES (1, 62);
 INSERT INTO `sys_role_menu` VALUES (1, 63);
 INSERT INTO `sys_role_menu` VALUES (1, 64);
 INSERT INTO `sys_role_menu` VALUES (1, 65);
+INSERT INTO `sys_role_menu` VALUES (1, 66);
+INSERT INTO `sys_role_menu` VALUES (1, 67);
 INSERT INTO `sys_role_menu` VALUES (1, 68);
 INSERT INTO `sys_role_menu` VALUES (1, 69);
 INSERT INTO `sys_role_menu` VALUES (1, 70);
 INSERT INTO `sys_role_menu` VALUES (1, 71);
 INSERT INTO `sys_role_menu` VALUES (1, 72);
+INSERT INTO `sys_role_menu` VALUES (1, 75);
+INSERT INTO `sys_role_menu` VALUES (1, 76);
+INSERT INTO `sys_role_menu` VALUES (1, 77);
+INSERT INTO `sys_role_menu` VALUES (1, 78);
+INSERT INTO `sys_role_menu` VALUES (1, 79);
+INSERT INTO `sys_role_menu` VALUES (1, 80);
+INSERT INTO `sys_role_menu` VALUES (1, 81);
+INSERT INTO `sys_role_menu` VALUES (1, 82);
+INSERT INTO `sys_role_menu` VALUES (1, 83);
+INSERT INTO `sys_role_menu` VALUES (1, 84);
+INSERT INTO `sys_role_menu` VALUES (1, 85);
+INSERT INTO `sys_role_menu` VALUES (1, 86);
+INSERT INTO `sys_role_menu` VALUES (1, 87);
+INSERT INTO `sys_role_menu` VALUES (1, 88);
+INSERT INTO `sys_role_menu` VALUES (1, 89);
+INSERT INTO `sys_role_menu` VALUES (1, 90);
+INSERT INTO `sys_role_menu` VALUES (1, 91);
+INSERT INTO `sys_role_menu` VALUES (1, 92);
+INSERT INTO `sys_role_menu` VALUES (1, 93);
 INSERT INTO `sys_role_menu` VALUES (2, 1);
 INSERT INTO `sys_role_menu` VALUES (2, 4);
 INSERT INTO `sys_role_menu` VALUES (2, 5);
@@ -839,14 +1140,8 @@ INSERT INTO `sys_role_menu` VALUES (2, 30);
 INSERT INTO `sys_role_menu` VALUES (2, 35);
 INSERT INTO `sys_role_menu` VALUES (2, 40);
 INSERT INTO `sys_role_menu` VALUES (3, 1);
-INSERT INTO `sys_role_menu` VALUES (3, 2);
 INSERT INTO `sys_role_menu` VALUES (3, 4);
-INSERT INTO `sys_role_menu` VALUES (3, 5);
-INSERT INTO `sys_role_menu` VALUES (3, 6);
-INSERT INTO `sys_role_menu` VALUES (3, 7);
 INSERT INTO `sys_role_menu` VALUES (3, 8);
-INSERT INTO `sys_role_menu` VALUES (3, 12);
-INSERT INTO `sys_role_menu` VALUES (3, 13);
 INSERT INTO `sys_role_menu` VALUES (3, 17);
 INSERT INTO `sys_role_menu` VALUES (3, 18);
 INSERT INTO `sys_role_menu` VALUES (3, 19);
@@ -854,35 +1149,31 @@ INSERT INTO `sys_role_menu` VALUES (3, 20);
 INSERT INTO `sys_role_menu` VALUES (3, 21);
 INSERT INTO `sys_role_menu` VALUES (3, 22);
 INSERT INTO `sys_role_menu` VALUES (3, 23);
-INSERT INTO `sys_role_menu` VALUES (3, 24);
-INSERT INTO `sys_role_menu` VALUES (3, 25);
-INSERT INTO `sys_role_menu` VALUES (3, 26);
-INSERT INTO `sys_role_menu` VALUES (3, 27);
-INSERT INTO `sys_role_menu` VALUES (3, 28);
-INSERT INTO `sys_role_menu` VALUES (3, 29);
-INSERT INTO `sys_role_menu` VALUES (3, 30);
-INSERT INTO `sys_role_menu` VALUES (3, 31);
-INSERT INTO `sys_role_menu` VALUES (3, 32);
-INSERT INTO `sys_role_menu` VALUES (3, 33);
-INSERT INTO `sys_role_menu` VALUES (3, 34);
-INSERT INTO `sys_role_menu` VALUES (3, 35);
-INSERT INTO `sys_role_menu` VALUES (3, 36);
-INSERT INTO `sys_role_menu` VALUES (3, 37);
-INSERT INTO `sys_role_menu` VALUES (3, 38);
-INSERT INTO `sys_role_menu` VALUES (3, 39);
 INSERT INTO `sys_role_menu` VALUES (3, 40);
 INSERT INTO `sys_role_menu` VALUES (3, 41);
 INSERT INTO `sys_role_menu` VALUES (3, 42);
 INSERT INTO `sys_role_menu` VALUES (3, 43);
 INSERT INTO `sys_role_menu` VALUES (3, 44);
 INSERT INTO `sys_role_menu` VALUES (3, 45);
-INSERT INTO `sys_role_menu` VALUES (3, 54);
-INSERT INTO `sys_role_menu` VALUES (3, 55);
-INSERT INTO `sys_role_menu` VALUES (3, 56);
-INSERT INTO `sys_role_menu` VALUES (3, 57);
-INSERT INTO `sys_role_menu` VALUES (3, 58);
 INSERT INTO `sys_role_menu` VALUES (3, 66);
 INSERT INTO `sys_role_menu` VALUES (3, 67);
+INSERT INTO `sys_role_menu` VALUES (3, 68);
+INSERT INTO `sys_role_menu` VALUES (3, 69);
+INSERT INTO `sys_role_menu` VALUES (3, 70);
+INSERT INTO `sys_role_menu` VALUES (3, 71);
+INSERT INTO `sys_role_menu` VALUES (3, 73);
+INSERT INTO `sys_role_menu` VALUES (3, 75);
+INSERT INTO `sys_role_menu` VALUES (3, 76);
+INSERT INTO `sys_role_menu` VALUES (3, 77);
+INSERT INTO `sys_role_menu` VALUES (3, 78);
+INSERT INTO `sys_role_menu` VALUES (3, 80);
+INSERT INTO `sys_role_menu` VALUES (3, 82);
+INSERT INTO `sys_role_menu` VALUES (3, 83);
+INSERT INTO `sys_role_menu` VALUES (3, 87);
+INSERT INTO `sys_role_menu` VALUES (3, 88);
+INSERT INTO `sys_role_menu` VALUES (3, 89);
+INSERT INTO `sys_role_menu` VALUES (3, 90);
+INSERT INTO `sys_role_menu` VALUES (3, 92);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -905,14 +1196,14 @@ CREATE TABLE `sys_user`  (
   `update_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '更新者',
   `update_time` timestamp(0) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES (1, 101, 'admin', '开发', 'yzz_ivy@163.com', '15088888888', '172eee54aa664e9dd0536b063796e54e', '', 'Y', 0, '维护中', 'admin', '2018-05-09 14:31:15', 'ry', '2018-03-01 00:00:00');
-INSERT INTO `sys_user` VALUES (3, 102, 'abcde', '自动', 'sadd@651', '111', '24d794dfc756320ffadb905d526299bc', '', 'N', 0, '', 'admin', '2018-05-10 09:51:48', 'admin', '2018-05-10 09:51:48');
-INSERT INTO `sys_user` VALUES (4, 105, 'manman', 'manman', '134@123', '213412425225', '24d794dfc756320ffadb905d526299bc', '', 'N', 0, '', 'admin', '2018-05-10 09:54:00', 'admin', '2018-05-10 09:54:00');
+INSERT INTO `sys_user` VALUES (5, 105, 'manman', '曼曼管理', '12314@1234', '123456789067', 'c9bdc4e218277cc4638ed78270788279', '', 'N', 0, '', 'admin', '2018-05-21 11:29:28', 'manman', '2018-05-21 11:29:28');
+INSERT INTO `sys_user` VALUES (6, 102, 'zidong', '子东', '123@123', '123465', 'b5dbb2625494be2e6e6ebf785467def9', '', 'N', 0, '', 'admin', '2018-05-21 11:13:31', '', '2018-05-21 11:13:29');
 
 -- ----------------------------
 -- Table structure for sys_user_online
@@ -949,6 +1240,8 @@ INSERT INTO `sys_user_post` VALUES ('1', '1');
 INSERT INTO `sys_user_post` VALUES ('2', '2');
 INSERT INTO `sys_user_post` VALUES ('3', '4');
 INSERT INTO `sys_user_post` VALUES ('4', '4');
+INSERT INTO `sys_user_post` VALUES ('5', '4');
+INSERT INTO `sys_user_post` VALUES ('6', '2');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -965,6 +1258,8 @@ CREATE TABLE `sys_user_role`  (
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES (1, 1);
 INSERT INTO `sys_user_role` VALUES (3, 2);
-INSERT INTO `sys_user_role` VALUES (4, 2);
+INSERT INTO `sys_user_role` VALUES (4, 3);
+INSERT INTO `sys_user_role` VALUES (5, 3);
+INSERT INTO `sys_user_role` VALUES (6, 3);
 
 SET FOREIGN_KEY_CHECKS = 1;
