@@ -30,7 +30,7 @@
 	</select>
 	<!--根据条件查询-->
 	<select id="selectDealList" parameterType="com.ruoyi.project.system.deal.domain.SysDeal" resultMap="BaseResultMap">
-		deal_id ,user_name,channel_name,merchant_name,product_name,sum_money,sum_profit,user_profit,create_time,update_time,create_by,update_by,remark
+		SELECT deal_id ,user_name,channel_name,merchant_name,product_name,sum_money,sum_profit,user_profit,create_time,update_time,create_by,update_by,remark
 		from sys_deal
 		<where>
 			<if test="userName != null and userName != ''">
@@ -45,6 +45,13 @@
 			<if test="productName != null and productName != ''">
 				AND product_name = #{productName}
 			</if>
+			<if test="starttime != null and starttime != ''">
+				AND create_time &gt;= #{starttime}
+			</if>
+			<if test="overtime != null and overtime != ''">
+				AND create_time	&lt;= #{overtime}
+			</if>
+
 		</where>
 	</select>
 	<!--根据id查询交易-->

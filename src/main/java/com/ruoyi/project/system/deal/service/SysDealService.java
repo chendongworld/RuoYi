@@ -22,7 +22,7 @@ public interface SysDealService {
     public List<SysDeal> selectSysDealAll();
 
     /**
-     * 根据条件查询
+     * 根据查询
      * @param sysDeal
      * @return
      */

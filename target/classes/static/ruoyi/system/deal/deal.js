@@ -53,6 +53,19 @@ $(function() {
             title: '备注'
         },
         {
+            field: 'addsumMoney',
+            title: '金额合计'
+        },
+        {
+            field: 'addsumProfit',
+            title: '利润合计'
+        },
+        {
+            field: 'adduserProfit',
+            title: '提成合计'
+        },
+
+        {
             title: '操作',
             align: 'center',
             formatter: function(value, row, index) {
@@ -87,13 +100,19 @@ function remove(id) {
 
 // 批量删除
 function batchRemove() {
-	var rows = $.getSelections("dealId");
-	alert(rows)
-	if (rows.length == 0) {
-		$.modalMsg("请选择要删除的数据", "warning");
-		return;
-	}
-	$.modalConfirm("确认要删除选中的" + rows.length + "条数据吗?", function(r) {
-		_ajax(prefix + '/batchRemove', { "ids": rows }, "post", r);
-	});
+    var rows = $.getSelections("dealId");
+    alert(rows)
+    if (rows.length == 0) {
+        $.modalMsg("请选择要删除的数据", "warning");
+        return;
+    }
+    $.modalConfirm("确认要删除选中的" + rows.length + "条数据吗?", function (r) {
+        _ajax(prefix + '/batchRemove', {"ids": rows}, "post", r);
+    });
+
 }
+
+
+
+
+

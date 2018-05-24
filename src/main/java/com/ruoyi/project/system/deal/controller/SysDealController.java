@@ -1,5 +1,6 @@
 package com.ruoyi.project.system.deal.controller;
 
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.JSON;
@@ -20,6 +21,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,11 +71,52 @@ public class SysDealController extends BaseController {
     @ResponseBody
     public TableDataInfo list(SysDeal deal)
     {
-        System.out.println(deal+"---------------------------------------------");
         setPageInfo(deal);
-        List<SysDeal> list = sysDealService.selectSysDealAll();
-//        List<SysDeal> list = sysDealService.selectDealList(deal);
+//        List<SysDeal> list = sysDealService.selectSysDealAll();
+        List<SysDeal> list = sysDealService.selectDealList(deal);
+        BigDecimal addsumMoney =new BigDecimal(0);
+        BigDecimal addsumProfit =new BigDecimal(0);
+        BigDecimal adduserProfit =new BigDecimal(0);
+        for (SysDeal sysDeal:list) {
+            addsumMoney=addsumMoney.add(sysDeal.getSumMoney());
+            sysDeal.setAddsumMoney(addsumMoney);
+            addsumProfit=addsumProfit.add(sysDeal.getSumProfit());
+            sysDeal.setAddsumProfit(addsumProfit);
+            adduserProfit=adduserProfit.add(sysDeal.getUserProfit());
+            sysDeal.setAdduserProfit(adduserProfit);
+        }
+//        model.addAttribute("submoney",submoney);
         return getDataTable(list);
+    }
+
+    @GetMapping("/search")
+    public String search(SysDeal deal ,String starttimes,String overtimes,Model model) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+           deal.setStarttime(starttimes);
+           deal.setOvertime(overtimes);
+        List<User> userList = userService.selectUserAll();
+        model.addAttribute("userList",userList);
+        List<SysChannel> channelList = channelService.selectSysChannelAll();
+        model.addAttribute("channelList",channelList);
+        List<SysMerchant> merchantList = merchantService.selectSysMerchantAll();
+        model.addAttribute("merchantList",merchantList);
+        List<Product> productList = productService.selectProductAll();
+        model.addAttribute("productList",productList);
+
+        List<SysDeal> list = sysDealService.selectDealList(deal);
+        BigDecimal addsumMoney =new BigDecimal(0);
+        BigDecimal addsumProfit =new BigDecimal(0);
+        BigDecimal adduserProfit =new BigDecimal(0);
+        for (SysDeal sysDeal:list) {
+            addsumMoney=addsumMoney.add(sysDeal.getSumMoney());
+            sysDeal.setAddsumMoney(addsumMoney);
+            addsumProfit=addsumProfit.add(sysDeal.getSumProfit());
+            sysDeal.setAddsumProfit(addsumProfit);
+            adduserProfit=adduserProfit.add(sysDeal.getUserProfit());
+            sysDeal.setAdduserProfit(adduserProfit);
+        }
+        model.addAttribute("list",list);
+        return prefix + "/search";
     }
 
     /**

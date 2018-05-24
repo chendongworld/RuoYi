@@ -66,7 +66,11 @@ public class SysDeal extends PageDomain {
      * 备注
      */
 	private String remark;
-
+	private String starttime;
+	private String overtime;
+	private  BigDecimal addsumMoney;
+	private  BigDecimal addsumProfit;
+	private  BigDecimal adduserProfit;
 
 	public Long getDealId() {
 		return dealId;
@@ -172,6 +176,46 @@ public class SysDeal extends PageDomain {
 		this.remark = remark;
 	}
 
+	public String getStarttime() {
+		return starttime;
+	}
+
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
+	}
+
+	public String getOvertime() {
+		return overtime;
+	}
+
+	public void setOvertime(String overtime) {
+		this.overtime = overtime;
+	}
+
+	public BigDecimal getAddsumMoney() {
+		return addsumMoney;
+	}
+
+	public void setAddsumMoney(BigDecimal addsumMoney) {
+		this.addsumMoney = addsumMoney;
+	}
+
+	public BigDecimal getAddsumProfit() {
+		return addsumProfit;
+	}
+
+	public void setAddsumProfit(BigDecimal addsumProfit) {
+		this.addsumProfit = addsumProfit;
+	}
+
+	public BigDecimal getAdduserProfit() {
+		return adduserProfit;
+	}
+
+	public void setAdduserProfit(BigDecimal adduserProfit) {
+		this.adduserProfit = adduserProfit;
+	}
+
 	@Override
 	public String toString() {
 		return "SysDeal{" +
@@ -188,6 +232,11 @@ public class SysDeal extends PageDomain {
 				", createBy='" + createBy + '\'' +
 				", updateBy='" + updateBy + '\'' +
 				", remark='" + remark + '\'' +
+				", starttime=" + starttime +
+				", overtime=" + overtime +
+				", addsumMoney=" + addsumMoney +
+				", addsumProfit=" + addsumProfit +
+				", adduserProfit=" + adduserProfit +
 				'}';
 	}
 }

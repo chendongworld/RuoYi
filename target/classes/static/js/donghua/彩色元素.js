@@ -13,7 +13,7 @@ $(function(){
 
     var dots = {
         nb: 1000,
-        distance: 60,
+        distance: 50,
         d_radius: 100,
         array: []
     };
