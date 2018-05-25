@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * 通用配置
- * 
+ *
  * @author ruoyi
  */
 @Configuration

@@ -94,15 +94,6 @@ public class SysDealController extends BaseController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
            deal.setStarttime(starttimes);
            deal.setOvertime(overtimes);
-        List<User> userList = userService.selectUserAll();
-        model.addAttribute("userList",userList);
-        List<SysChannel> channelList = channelService.selectSysChannelAll();
-        model.addAttribute("channelList",channelList);
-        List<SysMerchant> merchantList = merchantService.selectSysMerchantAll();
-        model.addAttribute("merchantList",merchantList);
-        List<Product> productList = productService.selectProductAll();
-        model.addAttribute("productList",productList);
-
         List<SysDeal> list = sysDealService.selectDealList(deal);
         BigDecimal addsumMoney =new BigDecimal(0);
         BigDecimal addsumProfit =new BigDecimal(0);

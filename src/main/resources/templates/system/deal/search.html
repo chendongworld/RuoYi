@@ -1,50 +1,106 @@
 <!DOCTYPE html>
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
-	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:fmt="">
+
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <link href="/ajax/libs/select/select2.css" rel="stylesheet">
 <script  src="/js/jquery.min.js"></script>
 <title>1111</title>
+<script type="text/javascript">
+   function altRows(id){
+             if(document.getElementsByTagName){
 
-<!--<style>-->
-	<!--#sousuo{-->
-		<!--top:0;-->
-		<!--width:100%;-->
-		<!--height: 35px;-->
-		<!--background: #baffff;-->
-	<!--}-->
-	<!--.mingcheng{-->
-		<!--width: 6%;-->
-	<!--}-->
-	<!--.neirong{-->
-		<!--width: 10%;-->
-	<!--}-->
-<!--</style>-->
+                     var table = document.getElementById(id);
+                    var rows = table.getElementsByTagName("tr");
+
+                     for(i = 0; i < rows.length; i++){
+                             if(i % 2 == 0){
+                                     rows[i].className = "evenrowcolor";
+                                 }else{
+                                     rows[i].className = "oddrowcolor";
+                                 }
+                         }
+                 }
+         }
+     window.onload=function(){
+             altRows('alternatecolor');
+         }
+
+
+
+
+
+   $(function(){
+       //$('table tr:not(:first)').remove();
+       var len = $('table tr').length;
+       for(var i = 1;i<len;i++){
+           $('table tr:eq('+i+') td:first').text(i);
+       }
+
+   });
+</script>
+
+<style>
+
+	table.altrowstable {
+		     font-family: verdana,arial,sans-serif;
+		     font-size:11px;
+		     color:#333333;
+		     border-width: 1px;
+		     border-color: #a9c6c9;
+		     border-collapse: collapse;
+		 }
+	 table.altrowstable th {
+		        border-width: 1px;
+		        padding: 8px;
+		        border-style: solid;
+		        border-color: #a9c6c9;
+		    }
+	 table.altrowstable td {
+		        border-width: 1px;
+		        padding: 8px;
+		        border-style: solid;
+		        border-color: #a9c6c9;
+		    }
+	 .oddrowcolor{
+		        background-color:#d4e3e5;
+		    }
+		 .evenrowcolor{
+		        background-color:#c3dde0;
+		    }
+	.title{
+		font-weight: bold;
+	}
+
+</style>
+
 
 <body >
-<div><a href="/system/deal">返回</a></div>
+<div style="width:100px;height:30px;margin-left: 20px;text-align: center"><a href="/system/deal" style="text-align: center"><h3>返回列表</h3></a></div>
 <div id="div-table">
-	<table border="1" bordercolor="#a0c6e5" style="border-collapse:collapse;">
+	<table class="altrowstable" id="alternatecolor">
 		<tr>
-			<td>交易编号</td>
-			<td>业务员</td>
-			<td>渠道名称</td>
-			<td>产品名称</td>
-			<td>商户名称</td>
-			<td>交易金额</td>
-			<td>利润</td>
-			<td>业务提成</td>
-			<td>创建者</td>
-			<td>创建时间</td>
-			<td>修改者</td>
-			<td>修改时间</td>
-			<td>备注</td>
-			<td>金额合计</td>
-			<td>利润合计</td>
-			<td>提成合计</td>
+			<td>序号</td>
+			<td class="title">交易编号</td>
+			<td class="title">业务员</td>
+			<td class="title">渠道名称</td>
+			<td class="title">产品名称</td>
+			<td class="title">商户名称</td>
+			<td class="title">交易金额</td>
+			<td class="title">利润</td>
+			<td class="title">业务提成</td>
+			<td class="title">创建者</td>
+			<td class="title">创建时间</td>
+			<td class="title">修改者</td>
+			<td class="title">修改时间</td>
+			<td class="title">备注</td>
+			<td class="title">金额合计</td>
+			<td class="title">利润合计</td>
+			<td class="title">提成合计</td>
 		</tr>
 		<tr th:each="deal:${list}" >
+			<td></td>
 			<td th:value="${deal.userName}" th:text="${deal.dealId}"></td>
 			<td th:value="${deal.userName}" th:text="${deal.userName}"></td>
 			<td th:value="${deal.userName}" th:text="${deal.channelName}"></td>
@@ -54,7 +110,7 @@
 			<td th:value="${deal.userName}" th:text="${deal.sumProfit}"></td>
 			<td th:value="${deal.userName}" th:text="${deal.userProfit}"></td>
 			<td th:value="${deal.userName}" th:text="${deal.createBy}"></td>
-			<td th:value="${deal.userName}" th:text="${deal.createTime}"></td>
+			<td th:text="${#dates.format(deal.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
 			<td th:value="${deal.userName}" th:text="${deal.updateBy}"></td>
 			<td th:value="${deal.userName}" th:text="${deal.updateTime}"></td>
 			<td th:value="${deal.userName}" th:text="${deal.remark}"></td>
@@ -65,18 +121,6 @@
 	</table>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-<script  src="/ajax/libs/select/select2.js"></script>
 </body>
 
 </html>
