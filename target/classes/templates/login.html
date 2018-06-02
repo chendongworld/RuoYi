@@ -94,6 +94,7 @@
                     <input type="text"     name="username" class="form-control uname"     placeholder="用户名"   />
                     <!--value="admin"-->
                     <input type="password" name="password" class="form-control pword m-b" placeholder="密码"   />
+
                     <!--value="admin123"-->
                     <div>
                         <table border="0" cellspacing="5" cellpadding="5" >
@@ -161,7 +162,7 @@
         {
             $('#codespan').text("请输入验证码！");
 
-            // login();
+            login();
         }
         else if (inputCode.toUpperCase() != code.toUpperCase())
         {

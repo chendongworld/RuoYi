@@ -38,7 +38,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/system/deal")
 public class SysDealController extends BaseController {
-    private String prefix = "/system/deal";
+    private String prefix = "system/deal";
     @Autowired
     private SysDealService sysDealService;
     @Autowired

@@ -18,7 +18,7 @@ public class YuleController2  {
     private String prefix = "yule";
 
 
-    @RequestMapping("/feiji")
+    @RequestMapping("")
     public String feiji()
     {
         return prefix + "/feiji";

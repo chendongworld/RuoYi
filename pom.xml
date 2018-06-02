@@ -168,7 +168,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		 
+
+
 	</dependencies>
 	
 	<build>
@@ -180,7 +181,10 @@
 					<executable>true</executable>
 				</configuration>
 			</plugin>
+
 		</plugins>
+		<!--打包的名字-->
+		<finalName>ruoyi</finalName>
 	</build>
 	
 	<repositories>

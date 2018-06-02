@@ -28,7 +28,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/system/merchant")
 public class SysMerchantController extends BaseController {
-    private String prefix = "/system/merchant";
+    private String prefix = "system/merchant";
     @Autowired
     private SysMerchantService sysMerchantService;
     @Autowired

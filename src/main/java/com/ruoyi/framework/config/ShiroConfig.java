@@ -205,6 +205,7 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/druid/**", "anon");
         // 不需要拦截的访问
         filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/yule", "anon");
         // 退出 logout地址，shiro去清除session
         filterChainDefinitionMap.put("/logout", "logout");
         // 系统权限列表
